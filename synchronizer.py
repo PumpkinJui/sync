@@ -20,23 +20,23 @@ except:
             try:
                 resp = ntpc.request('ntp.ntsc.ac.cn').tx_time
             except:
-                resp = 1704038400
                 received = False
 
 if received:
     print('收到 NTP 服务器回复，当前时间戳为',resp)
+    date = datetime.fromtimestamp(resp).strftime('%Y-%m-%d')
+    print('转换时间戳到日期',date)
 else:
-    print('NTP 服务器无响应，自动将时间戳设为',resp)
-
-date = datetime.fromtimestamp(resp).strftime('%Y-%m-%d')
-print('转换时间戳到日期',date)
+    print('NTP 服务器无响应。')
+    date = input('请手动输入当前日期 (格式 YYYY-mm-dd)：')
 
 bat = open('sync.bat','w',encoding='gbk')
 bat.write('@ECHO OFF\n\n')
 bat.write('DATE {}\n'.format(date))
 bat.write('TIME 12:00:00\n\n')
 bat.write('net start w32time\n')
-bat.write('w32tm /resync')
+bat.write('w32tm /resync\n\n')
+bat.write('DEL sync.bat')
 bat.close()
 
 system('sync.bat')
