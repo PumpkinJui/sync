@@ -41,5 +41,5 @@ Despite this, forks & PRs are still welcomed.
 
 ## 已知问题
 
-- 部分甚至相当一部分杀毒软件会将本软件误报为病毒，如误报为 Trojan 木马。** 本软件不含木马病毒代码 ** 并已全部开源，可自行下载整库后运行 toolbox 内的 `pack.bat` 进行打包构建 (需要拥有 Python 环境、ntplib 第三方库和 pyinstaller 第三方库)。
+- 部分甚至相当一部分杀毒软件会将本软件误报为病毒，如误报为 Trojan 木马。**本软件不含木马病毒代码**并已全部开源，可自行下载整库后运行 toolbox 内的 `pack.bat` 进行打包构建 (需要拥有 Python 环境、ntplib 第三方库和 pyinstaller 第三方库)。
 - 如果 NTP 服务器无响应，只会提示输入日期而不会提示输入时间，反而选择拿系统时间服务校准的傻逼逻辑。
