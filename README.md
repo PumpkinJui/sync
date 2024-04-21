@@ -27,7 +27,7 @@ Despite this, forks & PRs are still welcomed.
 如果使用的环境没有那么苛刻，您可以在不使用本程序的同时解决电脑的校时问题。
 
 - 如果您的电脑只是需要一个自动校时：开启电脑的自动校时服务。它位于「控制面板 - 更改日期和时间 - Internet 时间 - 更改设置」。(差不多吧)
-- 如果您的电脑只是会在开机以后自动回到某一个时间点 (如 2013 年 1 月 1 日 00:00)：可能只是它的时间电池没电了。您可以拆开机箱换一块。
+- 如果您的电脑只是会在开机以后自动回到某一个时间点 (如 2013 年 01 月 01 日 00:00)：可能只是它的时间电池没电了。您可以拆开机箱换一块。
 - 如果您只是不想换 / 换不了时间电池，您可以选择打开您的注册表 (Win+R, regedit, Enter)，然后找到注册表项目 `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\W32Time\Config`，然后将 `MaxPosPhaseCorrection` 和 `MaxNegPhaseCorrection` 值均修改为 `0xFFFFFFF`。参考 [微软的这篇文档](https://learn.microsoft.com/en-us/troubleshoot/windows-server/identity/configure-w32ime-against-huge-time-offset)、[微软这篇文档的垃圾翻译版本](https://learn.microsoft.com/zh-cn/troubleshoot/windows-server/identity/configure-w32ime-against-huge-time-offset) 和 [这篇文章](https://www.getce.cn/show/165.html)。
 
 ## 使用方法
@@ -41,5 +41,4 @@ Despite this, forks & PRs are still welcomed.
 
 ## 已知问题
 
-- 部分甚至相当一部分杀毒软件会将本软件误报为病毒，如误报为 Trojan 木马。**本软件不含木马病毒代码**并已全部开源，可自行下载整库后运行 toolbox 内的 `pack.bat` 进行打包构建 (需要拥有 Python 环境、ntplib 第三方库和 pyinstaller 第三方库)。
-- 如果 NTP 服务器无响应，只会提示输入日期而不会提示输入时间，反而选择拿系统时间服务校准的傻逼逻辑。
+- 部分甚至相当一部分杀毒软件会将本软件误报为病毒，如误报为 Trojan 木马。**本软件不含木马病毒代码**并已全部开源，可自行下载整库后运行 toolbox 内的 `pack.bat` 进行打包构建 (需要拥有 Python 环境、ntplib 第三方库和 pyinstaller 第三方库)。我也会向 360 反馈误报，以在机房正常使用。

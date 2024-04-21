@@ -43,12 +43,7 @@ TIME {time}
 net start w32time
 w32tm /config /manualpeerlist:"%servers%" /syncfromflags:manual /reliable:yes /update
 w32tm /resync
-w32tm /query /status
 DEL sync.bat''')
 bat.close()
 
 system('sync.bat')
-
-print('当前本地时间：{}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
-
-none = input('请按 Enter 键退出...')
