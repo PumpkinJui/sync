@@ -1,13 +1,25 @@
 # https://blog.csdn.net/xy3233/article/details/122405558
 
-from ntplib import NTPClient
 from datetime import datetime
+from json import load
+from ntplib import NTPClient
 from os import system
+
+try:
+    with open('sync.json','r') as confR:
+        conf = load(confR)
+    print('配置文件读取成功！')
+except: # 当文件中只有一部分配置时，还是会报错
+    print('未读取到合法的配置文件，将使用默认配置...')
+    conf = {'abort': False, 'pause': True}
+
+print()
 
 print('当前本地时间：{}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
 
 ntpc = NTPClient()
 received = False
+writeBAT = True
 
 servers = ['time.windows.com','cn.ntp.org.cn','cn.pool.ntp.org','ntp.ntsc.ac.cn']
 for i in range(4):
@@ -25,17 +37,21 @@ if received:
     print(f'转换时间戳到日期 {date} 时间 {time}')
 else:
     print('预置列表内的所有 NTP 服务器均无响应。')
-    date = input('请手动输入当前日期 (格式 YYYY-mm-dd)：')
-    time = input('请手动输入当前时间 (格式 HH:MM:SS)：')
+    if not conf['abort']:
+        date = input('请手动输入当前日期 (格式 YYYY-mm-dd)：')
+        time = input('请手动输入当前时间 (格式 HH:MM:SS)：')
+    else:
+        writeBAT = False
 
-bat = open('sync.bat','w',encoding='gbk')
-bat.write('''@ECHO OFF
+if writeBAT:
+    with open('sync.bat','w',encoding='gbk') as bat:
+        bat.write('''@ECHO OFF
 setlocal
 
 set servers=''')
-for i in servers:
-    bat.write(f'{i} ')
-bat.write(f'''
+        for i in servers:
+            bat.write(f'{i} ')
+        bat.write(f'''
 
 DATE {date}
 TIME {time}
@@ -45,10 +61,11 @@ w32tm /config /manualpeerlist:"%servers%" /syncfromflags:manual /reliable:yes /u
 w32tm /resync
 w32tm /query /status
 DEL sync.bat''')
-bat.close()
 
 system('sync.bat')
 
 print('当前本地时间：{}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
 
-none = input('请按 Enter 键退出...')
+if conf['pause']:
+    print()
+    none = input('请按 Enter 键退出...')
