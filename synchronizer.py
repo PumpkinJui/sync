@@ -1,19 +1,11 @@
 # https://blog.csdn.net/xy3233/article/details/122405558
 
+from conf import *
 from datetime import datetime
-from json import load
 from ntplib import NTPClient
 from os import system
 
-try:
-    with open('sync.json','r') as confR:
-        conf = load(confR)
-    print('配置文件读取成功！')
-except: # 当文件中只有一部分配置时，还是会报错
-    print('未读取到合法的配置文件，将使用默认配置...')
-    conf = {'abort': False, 'pause': True}
-
-print()
+conf = confGet()
 
 print('当前本地时间：{}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
 
@@ -62,10 +54,10 @@ w32tm /resync
 w32tm /query /status
 DEL sync.bat''')
 
-system('sync.bat')
+    system('sync.bat')
 
-print('当前本地时间：{}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
+    print('当前本地时间：{}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
 
 if conf['pause']:
-    print()
+    print() # 空行需进行测试
     none = input('请按 Enter 键退出...')
