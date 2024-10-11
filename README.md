@@ -32,6 +32,13 @@ Despite this, forks & PRs are still welcomed.
 
 ## 使用方法
 
+### 配置文件
+
+配置文件 `sync.json` 使用 JSON 语言，支持的键值对如下：
+
+- abort：布尔值，控制程序在「预置列表内的所有 NTP 服务器均无响应」时应当如何处理。为 true 时，程序会自动终止；为 false 时，程序会提示用户输入日期与时间信息。默认值为 false。
+- pause：布尔值，控制程序在执行完成后应当如何处理。为 true 时，程序窗口会留存，以便用户查看信息；为 false 时，程序窗口会自动关闭。默认值为 true。
+
 ## 兼容性
 
 - 使用 pyinstaller 在 Windows 7 (32 bit) 环境下打包。理论上应该能兼容它和它以上的所有 Windows 版本，但未经全面测试。

@@ -1,6 +1,6 @@
 # https://blog.csdn.net/xy3233/article/details/122405558
 
-from conf import *
+from conf import confGet
 from datetime import datetime
 from ntplib import NTPClient
 from os import system

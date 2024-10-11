@@ -15,7 +15,7 @@ goto loop
 
 :pack
 CLS
-pyinstaller --hidden-import ntplib.NTPClient --version-file file_version_info.txt -F ../synchronizer.py
+pyinstaller --hidden-import conf.confGet --hidden-import ntplib.NTPClient --version-file file_version_info.txt -F ../synchronizer.py
 pause
 goto loop
 
