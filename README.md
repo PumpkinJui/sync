@@ -7,7 +7,9 @@ This software is **specifically and only** designed for users in the mainland of
 - Users in the other countries & territories may experience issues which nevertheless **will NOT be handled by me**.
 - There will be **ONLY** Simplified Chinese version and **no more localization provided**.
 
-Despite this, forks & PRs are still welcomed.
+However, since v1.3 this software is more customizable and supports different configurations. As mentioned below, you can set NTP servers, auto-exit after a run, etc.
+
+Also, forks & PRs are welcomed.
 
 ---
 
@@ -16,7 +18,9 @@ Despite this, forks & PRs are still welcomed.
 - 其他国家和地区的用户可能会遇到问题，但它们**将不会被我处理**。
 - 只提供简体中文版本，**不提供其他本地化版本**。
 
-尽管如此，依旧欢迎 Forks 和 Pull Requests。
+不过，自 v1.3 版起，该软件的可定制性更强，支持不同的配置。如下所述，您可以设置 NTP 服务器、运行后自动退出等。
+
+依旧欢迎 Forks 和 Pull Requests。
 
 ## 制作目的
 
@@ -36,8 +40,13 @@ Despite this, forks & PRs are still welcomed.
 
 配置文件 `sync.json` 使用 JSON 语言，支持的键值对如下：
 
-- abort：布尔值，控制程序在「预置列表内的所有 NTP 服务器均无响应」时应当如何处理。为 true 时，程序会自动终止；为 false 时，程序会提示用户输入日期与时间信息。默认值为 false。
-- pause：布尔值，控制程序在执行完成后应当如何处理。为 true 时，程序窗口会留存，以便用户查看信息；为 false 时，程序窗口会自动关闭。默认值为 true。
+- abort：布尔值，控制程序在「预置列表内的所有 NTP 服务器均无响应」时应当如何处理。为 `true` 时，程序会自动终止；为 `false` 时，程序会提示用户输入日期与时间信息。默认值为 `false`。
+- autoexit：布尔值，指定程序是否在执行完成后自动关闭窗口。为 `true` 时，程序窗口会自动关闭；为 `false` 时，程序窗口会留存，以便用户查看信息。默认值为 `true`。
+- servers：列表，指定程序使用的 NTP 服务器。修改此项会覆盖默认值。默认值为 `['time.windows.com','cn.ntp.org.cn','cn.pool.ntp.org','ntp.aliyun.com','ntp.ntsc.ac.cn']`。
+
+读取配置文件时，程序会自动检查每个键及其对应值的类型是否合法。如果非法，程序将跳过该键值对并显示一条警告。
+
+servers 键是个例外，程序只会检查它的对应值是否是一个列表，但不会检查列表中的内容。如果列表中的某 (些) 元素并非 NTP 服务器，程序将会在调用对应元素时显示「未响应」警告。
 
 ## 兼容性
 

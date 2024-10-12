@@ -3,7 +3,8 @@ from json.decoder import JSONDecodeError
 
 checklt = {
     'abort': [False,bool],
-    'pause': [True,bool]
+    'autoexit': [True,bool],
+    'servers': [['time.windows.com','cn.ntp.org.cn','cn.pool.ntp.org','ntp.aliyun.com','ntp.ntsc.ac.cn'],list]
 }
 
 def confDefault():

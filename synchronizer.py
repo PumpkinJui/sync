@@ -13,22 +13,21 @@ ntpc = NTPClient()
 received = False
 writeBAT = True
 
-servers = ['time.windows.com','cn.ntp.org.cn','cn.pool.ntp.org','ntp.ntsc.ac.cn']
-for i in range(4):
+for i in range(len(conf['servers'])):
     try:
-        resp = ntpc.request(servers[i]).tx_time
-        print(f'收到 NTP 服务器 {servers[i]} 回复，当前时间戳为',resp)
+        resp = ntpc.request(conf['servers'][i]).tx_time
+        print('收到 NTP 服务器 {} 回复，当前时间戳为 {}'.format(conf['servers'][i],resp))
         received = True
         break
     except:
-        print(f'NTP 服务器 {servers[i]} ({i+1}/4) 无响应。')
+        print('警告：NTP 服务器 {} ({}/{}) 无响应。'.format(conf['servers'][i],i+1,len(conf['servers'])))
 
 if received:
     date = datetime.fromtimestamp(resp).strftime('%Y-%m-%d')
     time = datetime.fromtimestamp(resp).strftime('%H:%M:%S')
     print(f'转换时间戳到日期 {date} 时间 {time}')
 else:
-    print('预置列表内的所有 NTP 服务器均无响应。')
+    print('错误：预置列表内的所有 NTP 服务器均无响应。')
     if not conf['abort']:
         date = input('请手动输入当前日期 (格式 YYYY-mm-dd)：')
         time = input('请手动输入当前时间 (格式 HH:MM:SS)：')
@@ -41,7 +40,7 @@ if writeBAT:
 setlocal
 
 set servers=''')
-        for i in servers:
+        for i in conf['servers']:
             bat.write(f'{i} ')
         bat.write(f'''
 
@@ -58,6 +57,6 @@ DEL sync.bat''')
 
     print('当前本地时间：{}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
 
-if conf['pause']:
+if not conf['autoexit']:
     print() # 空行需进行测试
     none = input('请按 Enter 键退出...')
