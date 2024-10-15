@@ -5,7 +5,7 @@ from datetime import datetime
 from ntplib import NTPClient
 from os import system
 
-conf = confGet()
+conf = confGet('sync.json')
 
 print('当前本地时间：{}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
 

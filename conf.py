@@ -28,9 +28,9 @@ def confMerge(confD,confC):
     confD.update(confC)
     return confD
 
-def confGet():
+def confGet(confFile):
     try:
-        with open('sync.json','r') as confR:
+        with open(confFile,'r') as confR:
             confG = load(confR)
         print('配置文件读取成功！')
     except FileNotFoundError:
