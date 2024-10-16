@@ -34,9 +34,16 @@ Also, forks & PRs are welcomed.
 - 如果您的电脑只是会在开机以后自动回到某一个时间点 (如 2013 年 01 月 01 日 00:00)：可能只是它的时间电池没电了。您可以拆开机箱换一块。
 - 如果您只是不想换 / 换不了时间电池，您可以选择打开您的注册表 (Win+R, regedit, Enter)，然后找到注册表项目 `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\W32Time\Config`，然后将 `MaxPosPhaseCorrection` 和 `MaxNegPhaseCorrection` 值均修改为 `0xFFFFFFF`。参考 [微软的这篇文档](https://learn.microsoft.com/en-us/troubleshoot/windows-server/identity/configure-w32ime-against-huge-time-offset)、[微软这篇文档的垃圾翻译版本](https://learn.microsoft.com/zh-cn/troubleshoot/windows-server/identity/configure-w32ime-against-huge-time-offset) 和 [这篇文章](https://www.getce.cn/show/165.html)。
 
+## 兼容性
+
+- 使用 pyinstaller 在 Windows 7 (32 bit) 环境下打包。理论上应该能兼容它和它以上的所有 Windows 版本，但未经全面测试。
+- 不对 Windows 7 以下版本的系统进行特别兼容设计，换句话说能用用不能用也不管。
+- 仅 Windows，不对其他平台兼容。
+- 需要拥有管理员权限，并以管理员身份运行此程序。
+
 ## 使用方法
 
-选中本程序后右键，点击「以管理员权限运行」，如有弹出新的窗口则点击「是」。
+选中本程序后右键，点击「以管理员身份运行」，如有弹出新的窗口则点击「是」。
 
 如果不想每次都选权限，可以在选中本程序后右键，点击「属性」，点击「兼容性」，点击「更改所有用户的设置」，勾选「以管理员身份运行此程序」，确定。
 
@@ -62,13 +69,6 @@ Also, forks & PRs are welcomed.
 读取配置文件时，程序会自动检查每个键及其对应值的类型是否合法。如果非法，程序将跳过该键值对并显示一条警告。
 
 `servers` 键是个例外，程序只会检查它的对应值是否是一个列表，但不会检查列表中的内容。如果列表中的某 (些) 元素并非合法的 NTP 服务器，程序将会在调用对应元素时显示「未响应」警告。
-
-## 兼容性
-
-- 使用 pyinstaller 在 Windows 7 (32 bit) 环境下打包。理论上应该能兼容它和它以上的所有 Windows 版本，但未经全面测试。
-- 不对 Windows 7 以下版本的系统进行特别兼容设计，换句话说能用用不能用也不管。
-- 仅 Windows，不对其他平台兼容。
-- 需要拥有管理员权限。
 
 ## 已知问题
 
