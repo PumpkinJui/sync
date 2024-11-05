@@ -30,9 +30,10 @@ VSVersionInfo(
       StringTable(
         u'040904b0',
         [StringStruct(u'FileVersion', u'1, 3, 0, 0'),
+        StringStruct('InternalName', 'sync'),
         StringStruct(u'LegalCopyright', u'Copyright (c) 2023-2024 PumpkinJui'),
-        StringStruct(u'OriginalFilename', u'synchronizer.exe'),
-        StringStruct(u'ProductName', u'synchronizer'),
+        StringStruct(u'OriginalFilename', u'sync.exe'),
+        StringStruct(u'ProductName', u'sync'),
         StringStruct(u'ProductVersion', u'1.3')])
       ]), 
     VarFileInfo([VarStruct(u'Translation', [2052, 1200])])

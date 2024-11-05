@@ -7,7 +7,9 @@ from os import system
 
 conf = confGet('sync.json')
 
+print()
 print('当前本地时间：{}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
+print()
 
 ntpc = NTPClient()
 received = False
@@ -35,6 +37,7 @@ else:
         writeBAT = False
 
 if writeBAT:
+    print()
     with open('sync.bat','w',encoding='gbk') as bat:
         bat.write('''@ECHO OFF
 setlocal
@@ -55,8 +58,9 @@ DEL sync.bat''')
 
     system('sync.bat')
 
+    print()
     print('当前本地时间：{}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
 
 if not conf['autoexit']:
-    print() # 空行需进行测试
+    print()
     none = input('请按 Enter 键退出...')

@@ -13,7 +13,7 @@ goto loop
 
 :online
 CLS
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple ntplib
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple ntplib --upgrade
 pause
 goto loop
 

@@ -15,19 +15,21 @@ goto loop
 
 :pack
 CLS
-pyinstaller --hidden-import conf.confGet --hidden-import ntplib.NTPClient --version-file file_version_info.txt -F ../synchronizer.py
+pyinstaller --clean --version-file file_version_info.txt -F ../sync.py
+rmdir /s /q build
+del sync.spec
 pause
 goto loop
 
 :pyinstaller
 CLS
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pyinstaller
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pyinstaller --upgrade
 pause
 goto loop
 
 :ntplib
 CLS
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple ntplib
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple ntplib --upgrade
 pause
 goto loop
 
